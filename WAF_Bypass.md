@@ -1,6 +1,82 @@
-#### Testing
+## **WAF(Web Application Firewall):-** 
+**Description:**
+> A WAF inspects incoming web traffic to detect and filter out potentially malicious requests or payloads. It analyzes both the request (input) and response (output) of web applications.
+>
+>It is a security solution designed to protect web applications from various attacks, such as cross-site scripting (XSS), SQL injection, cross-site request forgery (CSRF), and other vulnerabilities that can be exploited over HTTP and HTTPS protocols.
+
+
+**Deployment Options:**
+
+>**Cloud-based:** WAF Provided as a service by cloud providers to protect web applications hosted in the cloud.
+>
+>**Network based WAF:** Deployed on-premises within an organization's network infrastructure to protect web applications hosted internally.
+>
+>**Host-based WAF:** Installed on individual web servers or application servers to protect specific applications or services.
+
+**Benefits of Using a WAF:**
+
+>**Enhanced Security:** Protects web applications from a wide range of attacks and vulnerabilities.
+>
+>**Regulatory Compliance:** Helps organizations comply with security and privacy regulations that require protection of web applications.
+>
+>**Reduced Risk of Data Breaches:** Mitigates the risk of data breaches and unauthorized access to sensitive information.
+
+### **Here are some WAF Bypass Techniques:**
+
+#### **1. Input Manipulation Techniques**
+
+- **Obfuscation:** Obfuscation involves encoding or altering payloads to evade detection by signature-based filters.
+
+  **Payload Example:** SQL Injection using URL encoding
+    ```
+    Original: ' OR 1=1 --
+    Encoded: %27%20OR%201%3D1%20--
+**Explanation:** The single quote (') is URL encoded as %27, space as %20, and equals (=) as %3D. This obfuscated payload might evade simple WAF filters looking for exact SQL injection patterns.
+
+- **Concatenation:** Concatenation involves breaking up payloads or injecting additional characters to bypass filters.
+
+     **Payload Example:** Command Injection using parameter splitting
+     ```
+     Original: ; ls /
+    Split: ;%0als%20/
+>**Explanation:** This technique injects a newline character (%0a) and space (%20) to split the command ls /, which might evade filters looking for specific command injection patterns.
+
+- **Case Sensitivity:** Case sensitivity involves using mixed cases or alternative spellings to bypass case-sensitive filters.
+
+     **Payload Example:** SQL Injection with lowercase
+    ``` 
+    Original: UNION SELECT username, password FROM users --
+    Alternative: unION seLEct username, password from users --
+
+> **Explanation:** By using different case combinations (UNION, unION, seLEct, from), this payload attempts to bypass filters that are case-sensitive.
+
+- **Hexadecimal or Unicode Encoding:** Hexadecimal or Unicode encoding represents characters in different formats to evade character-based filters.
+
+    **Payload Example:** Directory traversal using double URL encoding
+    ```
+    Original: /etc/passwd
+    Double encoded: %252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+
+> **Explanation:** Characters like / (%2f) and . (%2e) are double URL encoded to %252f and %252e, which might bypass filters expecting single URL encoding.
+
+#### **2. HTTP Protocol Violations**
+- **Overlong UTF-8 Encoding:-** Overlong UTF-8 encoding uses excessively long sequences to bypass filters expecting standard UTF-8 encoding.
+
+    **Payload Example:** SQL Injection with overlong UTF-8 encoding
+    ```
+    Original: ' OR 1=1 --
+    Encoded with overlong UTF-8: %C0%27%20OR%201%3D1%20--
+    ```
+> **Explanation:** The %C0%27 sequence represents an overlong UTF-8 encoding of ', which might evade filters that check for standard UTF-8 sequences.
 
 - **Overlong URL Encoding:-** Overlong URL encoding involves encoding characters multiple times to bypass URL decoding filters.
+
+    **Payload Example:** XSS payload with overlong URL encoding
+    ```
+    Original: <script>alert(1)</script>
+    Double encoded: %253C%252Fscr%2525%32Ft%253E%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E
+    ---
+    **Overlong URL Encoding:-** Overlong URL encoding involves encoding characters multiple times to bypass URL decoding filters.
 
     **Payload Example:** XSS payload with overlong URL encoding
     ```
@@ -62,18 +138,20 @@ Modified: <img src="x" onmoUSeover=alert(1)>
 
 > **Explanation:** The payload injects JavaScript through onerror attribute, using string concatenation (+'ipt>') to evade WAF filters expecting direct script tags.
 
-Tools:- https://github.com/Ekultek/WhatWaf
 
-Ref
 
-https://github.com/0xInfection/Awesome-WAF
 
-https://github.com/kh4sh3i/WAF-Bypass
 
-https://www.yeswehack.com/learn-bug-bounty/web-application-firewall-bypass
 
-https://medium.com/@allypetitt/5-ways-i-bypassed-your-web-application-firewall-waf-43852a43a1c2
 
-https://hacken.io/discover/how-to-bypass-waf-hackenproof-cheat-sheet/
+
+
+
+
+
+
+
+
+
 
 

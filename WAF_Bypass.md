@@ -75,14 +75,7 @@
     ```
     Original: <script>alert(1)</script>
     Double encoded: %253C%252Fscr%2525%32Ft%253E%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E
-    ---
-    **Overlong URL Encoding:-** Overlong URL encoding involves encoding characters multiple times to bypass URL decoding filters.
-
-    **Payload Example:** XSS payload with overlong URL encoding
-    ```
-    Original: <script>alert(1)</script>
-    Double encoded: %253C%252Fscr%2525%32Ft%253E%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E
-
+ 
 - **Double Encoding:-** Double encoding involves encoding special characters twice to bypass filters expecting single encoding.
 
     **Payload Example:-** SQL Injection with double URL encoding
@@ -137,6 +130,31 @@ Modified: <img src="x" onmoUSeover=alert(1)>
     Modified: <img src="notexist" onerror="document.write('<script>alert(document.cookie)</scr'+'ipt>');">
 
 > **Explanation:** The payload injects JavaScript through onerror attribute, using string concatenation (+'ipt>') to evade WAF filters expecting direct script tags.
+
+### **Some Useful Tools:-** 
+
+- **[WhatWaf](https://github.com/Ekultek/WhatWaf):-** WhatWaf can attempt to discover a bypass by utilizing tamper scripts and assessing the web server’s response to the various payloads.
+- **[nowafpls](https://github.com/assetnote/nowafpls):-** Burp plugin to add junk data to requests to bypass WAFs by length
+- **[w3af](https://github.com/andresriancho/w3af):-** Web Application Attack and Audit Framework
+- **[wafw00f](https://github.com/EnableSecurity/wafw00f):-** Identify and fingerprint Web Application Firewall
+- **[BypassWAF](https://github.com/vincentcox/bypass-firewalls-by-DNS-history):-** Bypass firewalls by abusing DNS history. This tool will search for old DNS A records and check if the server replies for that domain.
+- **[CloudFail](https://github.com/m0rtem/CloudFail):-** It is a tactical reconnaissance tool that tries to find the original IP address behind the Cloudflare WAF.
+
+
+### **References**
+
+- https://github.com/0xInfection/Awesome-WAF
+
+- https://github.com/kh4sh3i/WAF-Bypass
+
+- https://www.yeswehack.com/learn-bug-bounty/web-application-firewall-bypass
+
+- https://medium.com/@allypetitt/5-ways-i-bypassed-your-web-application-firewall-waf-43852a43a1c2
+
+- https://hacken.io/discover/how-to-bypass-waf-hackenproof-cheat-sheet/
+
+- https://book.hacktricks.xyz/v/fr/network-services-pentesting/pentesting-web/waf-bypass
+- https://github.com/kh4sh3i/WAF-Bypass?tab=readme-ov-file
 
 
 
